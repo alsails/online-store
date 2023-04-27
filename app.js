@@ -20,6 +20,6 @@ app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', require('./sarver/routers/index'));
+app.use('/', require('./server/routers/index'));
 
 app.listen(PORT);
