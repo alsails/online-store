@@ -13,6 +13,7 @@ function App() {
     useEffect(() => {
         Api.getCategories()
             .then((categories) => {
+                console.log('getCategories =>', categories.categories)
                 setCategories(categories.categories)
             })
             .catch(err => console.log(err))
