@@ -13,19 +13,17 @@ function App() {
     useEffect(() => {
         Api.getCategories()
             .then((categories) => {
-                console.log('getCategories =>', categories.categories)
-                setCategories(categories.categories)
+                setCategories(categories)
             })
             .catch(err => console.log(err))
     }, []);
-
     return (
         <div className={root.root}>
             <div className={page.page}>
                 <Header/>
                 <main className={page.page__main}>
                     <CategoryGoods categories={categories}/>
-                    <CategorySlider/>
+                    <CategorySlider categories={categories}/>
                 </main>
                 <Footer/>
             </div>
