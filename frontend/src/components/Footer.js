@@ -1,12 +1,10 @@
 import React from "react"
 import shortid from "shortid"
 
-import { categoryCards } from "../utils/categoryCards"
-
 import styles from "../styles/footer.module.scss"
 
 
-function Footer() {
+function Footer({categories}) {
     return (
         <footer className={styles.footer}>
             <div className={styles.footer__container}>
@@ -23,13 +21,13 @@ function Footer() {
                         <h2 className={styles.footer__info__list__title}>Категории</h2>
                         <div className={styles.footer__info__list__category}>
                             <ul className={styles.footer__info__list__points}>
-                                {categoryCards.slice(0, 3).map(item => {
-                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.title}</li>
+                                {categories.slice(0, 3).map(item => {
+                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
                                 })}
                             </ul>
                             <ul className={styles.footer__info__list__points}>
-                                {categoryCards.slice(3.4).map(item => {
-                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.title}</li>
+                                {categories.slice(3.4).map(item => {
+                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
                                 })}
                             </ul>
                         </div>

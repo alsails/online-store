@@ -9,7 +9,8 @@ module.exports.createGoods = (req, res, next) => {
 
 module.exports.getGoods = (req, res, next) => {
     goods.find()
-        .populate(['category', 'manufacturer'])
+        .populate({path: 'category', populate: { path: 'category' }})
+        .populate(['manufacturer'])
         .then((goods) => {
             res.send(goods)
         })

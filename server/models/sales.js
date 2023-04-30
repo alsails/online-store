@@ -6,10 +6,6 @@ const saleSchema = new mongoose.Schema({
         ref: 'good',
         required: true
     },
-    old_price: {
-        type: Number,
-        required: true
-    },
     new_price: {
         type: Number,
         required: true

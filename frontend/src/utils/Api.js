@@ -23,6 +23,20 @@ class Api extends React.Component {
             headers: this.headers
         })
     }
+
+    getGoods() {
+        return this._request(`goods`, {
+            method: 'GET',
+            headers: this.headers
+        })
+    }
+
+    getSale() {
+        return this._request(`sale`, {
+            method: 'GET',
+            headers: this.headers
+        })
+    }
 }
 
 const api = new Api({
