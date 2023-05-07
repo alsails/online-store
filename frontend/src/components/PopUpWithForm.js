@@ -1,0 +1,25 @@
+import React from "react";
+import styles from "../styles/popUpWithForm.module.scss";
+
+function PopUpWithForm({name, title, children, buttonText, isOpen, onClose, onSubmit, loginLink, login}) {
+    const classes = `${styles.popup} ${isOpen ? styles.popup__opened : " "}`
+    return (
+        <>
+        <div className={classes}>
+            <div className={styles.popup__container}>
+                <button type="button" id="profile-close" className={styles.popup__container__close_button} onClick={onClose}></button>
+                <h2 className={styles.popup__title}>{title}</h2>
+                <form className={styles.popup__form} name={`${name}`} onSubmit={onSubmit}>
+                    {children}
+                    <button type="submit" className={styles.popup__form__save_button}>{buttonText || 'Обработка...'}</button>
+                    {loginLink && <a href="#" onClick={login} className={styles.popup__form__login_link}>
+                        Уже зарегистрированы? Войти
+                    </a>}
+                </form>
+            </div>
+        </div>
+        </>
+    );
+}
+
+export default PopUpWithForm;

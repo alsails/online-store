@@ -31,6 +31,11 @@ const goodSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    likes:  [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        default: [],
+    }],
 });
 
 module.exports = mongoose.model('good', goodSchema);
