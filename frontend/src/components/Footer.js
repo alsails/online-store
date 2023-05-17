@@ -18,7 +18,7 @@ function Footer({categories}) {
                     </li>
 
                     <li className={styles.footer__info__list}>
-                        <h2 className={styles.footer__info__list__title}>Категории</h2>
+                        <h2 className={styles.footer__info__list__title}>Каталог</h2>
                         <div className={styles.footer__info__list__category}>
                             <ul className={styles.footer__info__list__points}>
                                 {categories.slice(0, 3).map(item => {
@@ -36,7 +36,6 @@ function Footer({categories}) {
                     <li className={styles.footer__info__list}>
                         <h2 className={styles.footer__info__list__title}>Информация</h2>
                         <ul className={styles.footer__info__list__points}>
-                            <li className={styles.footer__info__list__point}>Каталог</li>
                             <li className={styles.footer__info__list__point}>О нас</li>
                             <li className={styles.footer__info__list__point}>Гарантия</li>
                             <li className={styles.footer__info__list__point}>Магазины</li>

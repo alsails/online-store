@@ -1,3 +1,5 @@
+const baseUrl = 'http://localhost:3001'
+
 function checkResponse(res) {
     if (res.ok) {
         return res.json();
@@ -6,14 +8,13 @@ function checkResponse(res) {
 }
 
 function request(endpoint, options) {
-    return fetch(`/${endpoint}`, options).then(checkResponse)
+    return fetch(`${baseUrl}/${endpoint}`, options).then(checkResponse)
 }
 
 export const signup = ({ password, email }) => {
     return request(`signup`, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ password, email })
@@ -27,23 +28,24 @@ export const signin = (email, password) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
     })
-        .then((data) => {
-            if (data.token) {
-                localStorage.setItem('token', data.token);
+        .then((res) => {
+            if (res.jwt) {
+                localStorage.setItem('token', res.jwt);
             }
         })
 };
 
-export const checkToken = (token) => {
+export const checkToken = () => {
     return request(`users/me`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        }
+        },
+        credentials: 'include',
     })
         .then(data => { return data })
 }

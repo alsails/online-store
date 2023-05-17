@@ -48,6 +48,10 @@
             &:hover{
                 cursor: pointer;
             }
+
+            &:active {
+                border: 1px solid #F07D0F;
+            }
         }
 
         &__search {

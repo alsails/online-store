@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 const BadRequest = require('../error/BadRequest');
 const Conflict = require('../error/Conflict');
+const mongoose = require("mongoose");
+const NotFound = require("../error/NotFound");
+
+const { CastError, ValidationError } = mongoose.Error;
 
 module.exports.createUser = (req, res, next) => {
     const { email, password } = req.body;
@@ -34,21 +38,36 @@ module.exports.createUser = (req, res, next) => {
 module.exports.login = (req, res, next) => {
     const { email, password } = req.body;
 
-    return User.findUserByCredentials(email, password)
+    User.findUserByCredentials(email, password)
+
         .then((user) => {
-            const token = jwt.sign(
-                { _id: user._id },
-                'some-secret-key',
-                { expiresIn: '7d' });
+            const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
             res.cookie('jwt', token, {
                 expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
                 httpOnly: true,
             });
             const userInfo = user.toObject();
             delete userInfo.password;
+
             res.send({
-                data: userInfo,
+                data: req.cookies,
             });
         })
         .catch(next);
+};
+
+function findUserById(id) {
+    return User.findById(id)
+        .orFail(() => {
+            throw new NotFound('Пользователь с указанным _id не найден');
+        });
+}
+
+module.exports.getUser = (req, res, next) => {
+    findUserById(req.user._id)
+        .then((user) => {
+            console.log(user)
+            res.send({data: user})
+        })
+        .catch(err => console.log(err));
 };

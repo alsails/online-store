@@ -4,7 +4,7 @@ import PopUpWithForm from "./PopUpWithForm";
 
 import styles from "../styles/popUpWithForm.module.scss";
 
-function Login({ onClose, isOpen, handleLogin }) {
+function Login({ onClose, isOpen, handleLogin, register }) {
 
     const { values, handleChange } = useForm({});
 
@@ -21,7 +21,8 @@ function Login({ onClose, isOpen, handleLogin }) {
             name='login'
             title="Вход"
             buttonText="Войти"
-            loginLink={false}
+            registerLink={true}
+            register = {register}
             values = {values}
             handleChange={handleChange}
             onSubmit={handleSubmit}

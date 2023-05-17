@@ -6,7 +6,7 @@ import PopUpWithForm from "./PopUpWithForm";
 
 
 
-function Register({onClose, isOpen, handleRegister, login}) {
+function Register({onClose, isOpen, handleRegister}) {
     const { values, handleChange } = useForm({});
 
     const handleSubmit = (e) => {
@@ -25,7 +25,6 @@ function Register({onClose, isOpen, handleRegister, login}) {
             onSubmit={handleSubmit}
             onClose={onClose}
             isOpen={isOpen}
-            login={login}
         >
             <input className={styles.popup__form__input} id="email-input" type="email" name="email" placeholder="Email"
                    required value={values.email || ""} onChange={handleChange}/>
