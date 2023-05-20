@@ -1,7 +1,4 @@
 import React from "react"
-import { useContext } from "react";
-
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import Logo from "../image/logo.png"
 import iconLike from "../image/icons/like.svg"
@@ -9,11 +6,9 @@ import iconBuy from "../image/icons/buy.svg"
 import iconProfile from "../image/icons/profile.svg"
 
 import styles from "../styles/header.module.scss"
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
-function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn}) {
-    const currentUser = useContext(CurrentUserContext);
-    console.log(isLoggedIn)
+function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUser}) {
   return (
     <header className={styles.header}>
         <div className={styles.header__container}>
@@ -37,9 +32,9 @@ function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn}) {
                 <li className={styles.header__menu_icon}>
                     {isLoggedIn
                         ?
-                        <Link to={`/profile/${currentUser._id}`}><img className={styles.header__menu_icon__img} src={iconProfile} alt="Профиль"/></Link>
+                        <NavLink to={`/profile/${currentUser._id}`} className={({isActive}) => `${isActive ? styles.header__menu_icon__img__account__active : styles.header__menu_icon__img__account}`}></NavLink>
                         :
-                        <img onClick={isLoggedIn ? " " : onLoginPopUpClick} className={styles.header__menu_icon__img} src={iconProfile} alt="Профиль"/>
+                        <div onClick={onLoginPopUpClick} className={styles.header__menu_icon__img__account}/>
                     }
                 </li>
             </ul>

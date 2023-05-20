@@ -19,7 +19,7 @@ function Register({onClose, isOpen, handleRegister}) {
             name='register'
             title="Регистрация"
             buttonText="Зарегистрироваться"
-            loginLink={true}
+            registerLink={false}
             values = {values}
             handleChange={handleChange}
             onSubmit={handleSubmit}

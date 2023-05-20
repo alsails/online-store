@@ -15,10 +15,11 @@ module.exports.createUser = (req, res, next) => {
         .hash(password, 10)
         .then((hash) => User.create({ email, password: hash }))
         .then((user) => {
+            console.log(user)
             const userInfo = user.toObject();
             delete userInfo.password;
             res.send({
-                data: userInfo,
+                userInfo
             });
         })
         .catch((err) => {
@@ -49,9 +50,7 @@ module.exports.login = (req, res, next) => {
             const userInfo = user.toObject();
             delete userInfo.password;
 
-            res.send({
-                data: req.cookies,
-            });
+            res.send(req.cookies);
         })
         .catch(next);
 };
@@ -66,8 +65,7 @@ function findUserById(id) {
 module.exports.getUser = (req, res, next) => {
     findUserById(req.user._id)
         .then((user) => {
-            console.log(user)
-            res.send({data: user})
+            res.send(user)
         })
         .catch(err => console.log(err));
 };

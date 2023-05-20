@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {useNavigate} from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 
 import root from "../styles/root.module.scss"
 import page from "../styles/page.module.scss"
@@ -14,10 +13,8 @@ import CatalogPopUp from "../components/CatalogPopUp";
 import Good from "../components/Good";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Profile from "../components/Profile";
 import * as auth from "../utils/Auth";
-// import ProtectedRouteElement from "../components/ProtectedRoute";
-// import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import Profile from "../components/Profile";
 
 function App() {
     const [categories, setCategories] = useState([])
@@ -29,8 +26,6 @@ function App() {
     const [currentUser, setCurrentUser] = useState({})
 
     const isOpen = isCatalogPopUp || isLoginPopUp
-
-    const [userInfo, setUserInfo] = useState([])
 
     const [isLoggedIn, setLoggedIn] = useState(false)
 
@@ -59,24 +54,26 @@ function App() {
         setIsLoginPopUp(false)
     }
 
-    function login() {
-        setIsRegisterPopUp(false)
-        setIsLoginPopUp(true)
-    }
-
     useEffect(() => {
         function closeByEscape(evt) {
             if (evt.key === 'Escape') {
                 closeAllPopups();
             }
         }
+
+        function closeByOverlayClick(evt) {
+            if (evt.target === evt.currentTarget) {
+                closeAllPopups();
+            }
+        }
+
         if (isOpen) {
             document.addEventListener('keydown', closeByEscape);
             return () => {
                 document.removeEventListener('keydown', closeByEscape);
-            }
+            };
         }
-    }, [isOpen])
+    }, [isOpen, closeAllPopups])
 
     useEffect(() => {
         Api.getCategories()
@@ -99,7 +96,7 @@ function App() {
     function handleRegister(formValue) {
         auth.signup(formValue)
             .then(() => {
-                    login()
+                    closeAllPopups()
                 }
             )
             .catch((err) => console.log(err))
@@ -116,13 +113,26 @@ function App() {
     }
 
     useEffect(() => {
+        if (isLoggedIn) {
+            Promise.all([Api.getUserInfo()])
+                .then(([userData]) => {
+                    setCurrentUser(userData);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [isLoggedIn]);
+
+    useEffect(() => {
         function handleTokenCheck() {
             const token = localStorage.getItem('token');
             if (token) {
                 auth.checkToken().then((res) => {
                     if (res) {
                         setLoggedIn(true);
-                        navigate("/", { replace: true })
+                        setCurrentUser(res);
+                        navigate("/", {replace: true})
                     }
                 })
                     .catch(err => {
@@ -132,58 +142,54 @@ function App() {
         }
 
         handleTokenCheck();
-    }, [navigate])
+    }, [])
 
-    // useEffect(() => {
-    //     if (isLoggedIn) {
-    //         Promise.all([Api.getUserInfo()])
-    //             .then(([userData, cards]) => {
-    //                 setCurrentUser(userData.data);
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //             });
-    //     }
-    // }, [isLoggedIn]);
+    function signOut() {
+        localStorage.removeItem('token');
+        setLoggedIn(false);
+
+        navigate('/');
+    }
 
     return (
         <div className={root.root}>
             <div className={page.page}>
-                {/*<CurrentUserContext.Provider value={currentUser}>*/}
-                    {/*<Header onCategoryPopUpClick={handleCatalogPopUpClick} onLoginPopUpClick={handleLoginPopUpClick} isLoggedIn={isLoggedIn}/>*/}
-                    <main className={page.page__main}>
-                        <Routes>
-                            <Route path="/" element={
-                                <>
-                                    <CategoryGoods categories={categories}/>
-                                    <CategorySlider categories={categories} goods={goods} sale={sale}/>
-                                </>
-                            }/>
-                            <Route path="/categories/:categoriesId" element={
-                                <>
-                                    <CategoryCards categories={categories} goods={goods} sale={sale}/>
-                                </>
-                            }/>
-                            {/*<Route path="/good/:goodId" element={*/}
-                            {/*    <>*/}
-                            {/*        <Good goods={goods} sale={sale}/>*/}
-                            {/*    </>*/}
-                            {/*}/>*/}
-                            {/*<Route path="/profile" element={*/}
-                            {/*    <>*/}
-                            {/*        <ProtectedRouteElement element={Profile} loggedIn={isLoggedIn}/>*/}
-                            {/*    </>*/}
-                            {/*} />*/}
-                        </Routes>
-                    </main>
-                    <Footer categories={categories}/>
-                    <CatalogPopUp onClose={closeAllPopups} isOpen={isCatalogPopUp} categories={categories}/>
-                    <Login onClose={closeAllPopups} register={register} isOpen={isLoginPopUp} handleLogin={handleLogin} />
-                    <Register onClose={closeAllPopups}  isOpen={isRegisterPopUp} handleRegister={handleRegister} />
-                {/*</CurrentUserContext.Provider>*/}
+                <Header onCategoryPopUpClick={handleCatalogPopUpClick} onLoginPopUpClick={handleLoginPopUpClick}
+                        isLoggedIn={isLoggedIn} currentUser={currentUser}/>
+                <main className={page.page__main}>
+                    <Routes>
+                        <Route path="/" element={
+                            <>
+                                <CategoryGoods categories={categories}/>
+                                <CategorySlider categories={categories} goods={goods} sale={sale}/>
+                            </>
+                        }/>
+                        <Route path="/categories/:categoriesId" element={
+                            <>
+                                <CategoryCards categories={categories} goods={goods} sale={sale}/>
+                            </>
+                        }/>
+                        <Route path="/good/:goodId" element={
+                            <>
+                                <Good goods={goods} sale={sale}/>
+                            </>
+                        }/>
+                        <Route path="/profile/:userId" element={
+                            <>
+                                <Profile currentUser={currentUser} onClick={signOut}/>
+                            </>
+                        }/>
+                    </Routes>
+                </main>
+                <Footer categories={categories}/>
+                <CatalogPopUp onClose={closeAllPopups} isOpen={isCatalogPopUp} categories={categories}/>
+                <Login onClose={closeAllPopups} isOpen={isLoginPopUp} handleLogin={handleLogin} register={register}/>
+                <Register onClose={closeAllPopups} isOpen={isRegisterPopUp}
+                          handleRegister={handleRegister}/>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;

@@ -29,11 +29,9 @@ function CategorySlider({categories, goods, sale}) {
                             const info = {_id: item.good_name._id, name: item.good_name.name, img: item.good_name.img, price: item.good_name.price, new_price: item.new_price}
                             return(
                                 <>
-                                    <Link target="_blank" to={`/good/${info._id}`} style={{ textDecoration: 'none' }}>
-                                        <li key={shortid.generate()}>
-                                            <PreviewCard item={info}/>
-                                        </li>
-                                    </Link>
+                                    <li key={shortid.generate()}>
+                                        <PreviewCard item={info}/>
+                                    </li>
                                 </>
                             )
                         })
@@ -53,11 +51,9 @@ function CategorySlider({categories, goods, sale}) {
                                         }).slice(0, 3).map(item => {
                                             return (
                                                 <>
-                                                    <Link target="_blank" to={`/good/${item._id}`} style={{ textDecoration: 'none' }}>
-                                                        <li key={shortid.generate()}>
-                                                            <PreviewCard item={item}/>
-                                                        </li>
-                                                    </Link>
+                                                    <li key={shortid.generate()}>
+                                                        <PreviewCard item={item}/>
+                                                    </li>
                                                 </>
                                             )
                                         })

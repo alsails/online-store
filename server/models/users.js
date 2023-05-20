@@ -4,25 +4,16 @@ const bcrypt = require('bcryptjs');
 const NotAuthenticated = require('../error/NotAuthenticated');
 
 const userSchema = new mongoose.Schema({
-    surname: {
-        type: String,
-        minlength: 2,
-        maxlength: 30,
-    },
     name: {
         type: String,
         minlength: 2,
-        maxlength: 30,
-    },
-    middle_name: {
-        type: String,
-        minlength: 2,
-        maxlength: 30,
+        default: 'ФИО'
     },
     phone_number: {
         type: String,
         minlength: 11,
         maxlength: 11,
+        default: '89998887777'
     },
     email: {
         type: String,
