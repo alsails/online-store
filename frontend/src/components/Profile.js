@@ -1,7 +1,6 @@
 import styles from "../styles/profile.module.scss"
 
 function Profile({currentUser, onClick}) {
-    console.log(currentUser)
     return (
         <div className={styles.profile}>
             <div className={styles.profile__header}>

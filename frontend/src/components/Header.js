@@ -24,7 +24,12 @@ function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUse
             </div>
             <ul className={styles.header__menu_icons}>
                 <li className={styles.header__menu_icon}>
-                    <img className={styles.header__menu_icon__img} src={iconLike} alt="Избранное"/>
+                    {isLoggedIn
+                        ?
+                        <NavLink to={`/goods/like`} className={({isActive}) => `${isActive ? styles.header__menu_icon__img__like__active : styles.header__menu_icon__img__like}`}></NavLink>
+                        :
+                        <div onClick={onLoginPopUpClick} className={styles.header__menu_icon__img__like}/>
+                    }
                 </li>
                 <li className={styles.header__menu_icon}>
                     <img className={styles.header__menu_icon__img} src={iconBuy} alt="Корзина"/>

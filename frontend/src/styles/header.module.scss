@@ -112,6 +112,24 @@
                 cursor: pointer;
             }
 
+            &__like {
+                background-image: url("../image/icons/like.svg");
+                background-size: cover;
+                background-position: center;
+
+                width: 32px;
+                height: 32px;
+
+                &__active {
+                    background-image: url("../image/icons/like__active.svg");
+                    background-size: cover;
+                    background-position: center;
+
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+
             &__account {
                 background-image: url("../image/icons/profile.svg");
                 background-size: cover;
@@ -127,7 +145,6 @@
 
                     width: 32px;
                     height: 32px;
-
                 }
             }
         }

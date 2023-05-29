@@ -7,9 +7,9 @@ import PreviewCard from "./PreviewCard";
 import styles from "../styles/categorySlider.module.scss"
 import {Link} from "react-router-dom";
 
-function CategorySlider({categories, goods, sale}) {
+function CategorySlider({categories, goods, sale, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick}) {
     const allGoods = goods.map(good => {
-        const matchingName = sale.find(item => item.good_name.name === good.name);
+        const matchingName = sale.find(item => item.good_name._id === good._id);
         if (matchingName) {
             return {...good, new_price: matchingName.new_price};
         } else {
@@ -25,12 +25,13 @@ function CategorySlider({categories, goods, sale}) {
                 </Link>
                 <ul className={styles.cards}>
                     {
-                        sale.slice(0, 3).map(item => {
-                            const info = {_id: item.good_name._id, name: item.good_name.name, img: item.good_name.img, price: item.good_name.price, new_price: item.new_price}
+                        allGoods.filter(item => {
+                            return item.new_price !== undefined
+                        }).slice(0, 3).map(item => {
                             return(
                                 <>
                                     <li key={shortid.generate()}>
-                                        <PreviewCard item={info}/>
+                                        <PreviewCard onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
                                     </li>
                                 </>
                             )
@@ -52,7 +53,7 @@ function CategorySlider({categories, goods, sale}) {
                                             return (
                                                 <>
                                                     <li key={shortid.generate()}>
-                                                        <PreviewCard item={item}/>
+                                                        <PreviewCard onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
                                                     </li>
                                                 </>
                                             )

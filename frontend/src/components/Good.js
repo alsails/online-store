@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import styles from '../styles/Good.module.scss'
 
 
-function Good({goods, sale}) {
+function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUser}) {
     const {goodId} = useParams();
 
     const allGoods = goods.map(good => {
@@ -23,6 +23,15 @@ function Good({goods, sale}) {
         <div className={styles.good}>
             {good.map(item => {
                 let status = 'new_price' in item
+
+                const isLiked = item.likes.some(i => {
+                    return i._id === currentUser._id
+                });
+                const cardLikeButtonClassName = `${isLiked ? styles.good__card__container__info__card_for_buy__info__like__active : styles.good__card__container__info__card_for_buy__info__like}`
+
+                function handleLikeClick() {
+                    onCardLike(item);
+                }
                 return (
                     <>
                         <ul className={styles.good__category_bar}>
@@ -45,7 +54,12 @@ function Good({goods, sale}) {
                                             {status && <p className={styles.good__card__container__info__card_for_buy__info__new_price}>{item.new_price.toFixed(2)} ₽</p>}
                                             {status && <p className={styles.good__card__container__info__card_for_buy__info__old_price}><s>{item.price.toFixed(2)} ₽</s></p>}
                                             {!status && <p className={styles.good__card__container__info__card_for_buy__info__price}>{item.price.toFixed(2)} ₽</p>}
-                                            <button className={styles.good__card__container__info__card_for_buy__info__like} />
+                                            {isLoggedIn
+                                                ?
+                                                <button className={cardLikeButtonClassName} onClick={handleLikeClick}/>
+                                                :
+                                                <button className={styles.good__card__container__info__card_for_buy__info__like} onClick={onLoginPopUpClick}/>
+                                            }
                                         </div>
                                         <button className={styles.good__card__container__info__card_for_buy__buy}>В корзину</button>
                                     </div>

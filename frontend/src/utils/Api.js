@@ -49,6 +49,22 @@ class Api extends React.Component {
             credentials: 'include',
         })
     }
+
+    delLike(data) {
+        return this._request(`goods/${data}/likes`, {
+            method: 'DELETE',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    putLike(data) {
+        return this._request(`goods/${data}/likes`, {
+            method: 'PUT',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
 }
 
 const api = new Api({

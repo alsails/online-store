@@ -24,6 +24,19 @@
             &:hover {
                 cursor: pointer;
             }
+
+            &__active {
+                background-image: url("../image/icons/like__active.svg");
+                width: 32px;
+                height: 32px;
+
+                border: none;
+                background-color: transparent;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
 
         &__sale {

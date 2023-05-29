@@ -1,7 +1,9 @@
-const goods = require('../models/goods');
+const mongoose = require('mongoose');
+
+goods = require('../models/goods');
 const NotFound = require('../error/NotFound');
 const BadRequest = require('../error/BadRequest');
-
+const { CastError, ValidationError } = mongoose.Error;
 
 module.exports.createGoods = (req, res, next) => {
     const {name, subcategory, img, description, manufacturers, quantity, price} = req.body;
@@ -13,7 +15,7 @@ module.exports.createGoods = (req, res, next) => {
 module.exports.getGoods = (req, res, next) => {
     goods.find()
         .populate({path: 'category', populate: { path: 'category' }})
-        .populate(['manufacturer'])
+        .populate(['manufacturer', 'likes'])
         .then((goods) => {
             res.send(goods)
         })
@@ -27,11 +29,11 @@ module.exports.likeGood = (req, res, next) => {
         { new: true },
     )
         .populate({path: 'category', populate: { path: 'category' }})
+        .populate(['likes'])
         .orFail(() => {
             throw new NotFound('Карточка с указанным _id не найдена');
         })
         .then((good) => {
-            console.log(req.user._id)
             res.send(good)
         })
         .catch((err) => {
@@ -48,6 +50,7 @@ module.exports.dislikeGood = (req, res, next) => {
         { new: true },
     )
         .populate({path: 'category', populate: { path: 'category' }})
+        .populate(['likes'])
         .orFail(() => {
             throw new NotFound('Карточка с указанным _id не найдена');
         })

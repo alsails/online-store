@@ -121,8 +121,6 @@
               border: none;
               background-color: transparent;
               background-image: url("../image/icons/like.svg");
-
-              //margin: 26px 0 0 149px;
               padding: 0;
 
               position: absolute;
@@ -132,6 +130,20 @@
 
               &:hover {
                 cursor: pointer;
+              }
+
+              &__active {
+                width: 32px;
+                height: 32px;
+
+                border: none;
+                background-color: transparent;
+                background-image: url("../image/icons/like__active.svg");
+                padding: 0;
+
+                position: absolute;
+                top: 26px;
+                left: 536px;
               }
             }
           }

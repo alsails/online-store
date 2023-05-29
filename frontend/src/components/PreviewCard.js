@@ -1,20 +1,34 @@
 import React from "react"
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 import styles from "../styles/previewCard.module.scss"
 
 
-function PreviewCard({item}) {
+function PreviewCard({item, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick}) {
     let status = 'new_price' in item
+    const isLiked = item.likes.some(i => {
+        return i._id === currentUser._id
+    });
+    const cardLikeButtonClassName = `${isLiked ? styles.card__top__like__active : styles.card__top__like}`
+
+    function handleLikeClick() {
+        onCardLike(item);
+    }
 
     return (
-        <Link to={`/good/${item._id}`} style={{ textDecoration: 'none' }}>
             <div className={styles.card}>
                 <div className={styles.card__top}>
-                    <button className={styles.card__top__like} />
+                    {isLoggedIn
+                        ?
+                        <button className={cardLikeButtonClassName} onClick={handleLikeClick}/>
+                        :
+                        <button className={styles.card__top__like} onClick={onLoginPopUpClick}/>
+                    }
                     {status && <p className={styles.card__top__sale}>-{Math.round(100 - ((item.new_price * 100) / item.price))}%</p>}
                 </div>
-                <img className={styles.card__img} src={item.img} alt={item.name} />
+                <Link to={`/good/${item._id}`} style={{ textDecoration: 'none' }}>
+                    <img className={styles.card__img} src={item.img} alt={item.name} />
+                </Link>
                 <p className={styles.card__description}>{item.name}</p>
                 <div className={styles.card__bottom}>
                     <div className={styles.card__bottom__prices}>
@@ -25,7 +39,6 @@ function PreviewCard({item}) {
                     <button className={styles.card__bottom__buy} />
                 </div>
             </div>
-        </Link>
     );
 }
 

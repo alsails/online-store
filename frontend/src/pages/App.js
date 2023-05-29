@@ -15,6 +15,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import * as auth from "../utils/Auth";
 import Profile from "../components/Profile";
+import Likes from "../components/Likes";
 
 function App() {
     const [categories, setCategories] = useState([])
@@ -112,6 +113,33 @@ function App() {
             .catch(err => console.log(err));
     }
 
+    function handleCardLike(good) {
+        console.log(currentUser._id)
+        const isLiked = good.likes.some(i => i._id === currentUser._id)
+
+        if (!isLiked) {
+            Api
+                .putLike(good._id, !isLiked)
+                .then((newGood) => {
+                    setGoods((state) =>
+                        state.map((c) => (c._id === good._id ? newGood : c))
+                    )
+                })
+                .catch(err =>
+                    console.log(err))
+        } else {
+            Api
+                .delLike(good._id, isLiked)
+                .then((newGood) => {
+                    setGoods((state) =>
+                        state.map((c) => (c._id === good._id ? newGood : c))
+                    )
+                })
+                .catch(err =>
+                    console.log(err))
+        }
+    }
+
     useEffect(() => {
         if (isLoggedIn) {
             Promise.all([Api.getUserInfo()])
@@ -161,22 +189,27 @@ function App() {
                         <Route path="/" element={
                             <>
                                 <CategoryGoods categories={categories}/>
-                                <CategorySlider categories={categories} goods={goods} sale={sale}/>
+                                <CategorySlider isLoggedIn={isLoggedIn} onCardLike={handleCardLike} onLoginPopUpClick={handleLoginPopUpClick} currentUser={currentUser} categories={categories} goods={goods} sale={sale}/>
                             </>
                         }/>
                         <Route path="/categories/:categoriesId" element={
                             <>
-                                <CategoryCards categories={categories} goods={goods} sale={sale}/>
+                                <CategoryCards isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={handleCardLike} categories={categories} goods={goods} sale={sale}/>
                             </>
                         }/>
                         <Route path="/good/:goodId" element={
                             <>
-                                <Good goods={goods} sale={sale}/>
+                                <Good isLoggedIn={isLoggedIn} currentUser={currentUser} onLoginPopUpClick={handleLoginPopUpClick} onCardLike={handleCardLike} goods={goods} sale={sale}/>
                             </>
                         }/>
                         <Route path="/profile/:userId" element={
                             <>
                                 <Profile currentUser={currentUser} onClick={signOut}/>
+                            </>
+                        }/>
+                        <Route path="/goods/like" element={
+                            <>
+                                <Likes isLoggedIn={isLoggedIn} goods={goods} onLoginPopUpClick={handleLoginPopUpClick} onCardLike={handleCardLike} sale={sale} currentUser={currentUser}/>
                             </>
                         }/>
                     </Routes>
