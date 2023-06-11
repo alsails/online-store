@@ -1,14 +1,12 @@
 import React from "react"
 
 import Logo from "../image/logo.png"
-import iconLike from "../image/icons/like.svg"
-import iconBuy from "../image/icons/buy.svg"
-import iconProfile from "../image/icons/profile.svg"
 
 import styles from "../styles/header.module.scss"
 import {Link, NavLink} from "react-router-dom";
+import Search from "./Search";
 
-function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUser}) {
+function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUser, goods, sale, onSearchPopUpClick, onClose, isOpen}) {
   return (
     <header className={styles.header}>
         <div className={styles.header__container}>
@@ -19,8 +17,7 @@ function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUse
             </div>
             <div className={styles.header__search_bar}>
                 <button onClick={onCategoryPopUpClick} className={styles.header__search_bar__catalog_button}>Каталог</button>
-                <input className={styles.header__search_bar__search}/>
-                <button className={styles.header__search_bar__search_button}/>
+                <Search goods={goods} sale={sale} onSearchPopUpClick={onSearchPopUpClick} onClose={onClose} isOpen={isOpen}/>
             </div>
             <ul className={styles.header__menu_icons}>
                 <li className={styles.header__menu_icon}>
@@ -32,7 +29,12 @@ function Header({onCategoryPopUpClick, onLoginPopUpClick, isLoggedIn, currentUse
                     }
                 </li>
                 <li className={styles.header__menu_icon}>
-                    <img className={styles.header__menu_icon__img} src={iconBuy} alt="Корзина"/>
+                    {isLoggedIn
+                        ?
+                        <NavLink to={`/carts`} className={({isActive}) => `${isActive ? styles.header__menu_icon__img__cart__active : styles.header__menu_icon__img__cart}`}></NavLink>
+                        :
+                        <div onClick={onLoginPopUpClick} className={styles.header__menu_icon__img__cart}/>
+                    }
                 </li>
                 <li className={styles.header__menu_icon}>
                     {isLoggedIn

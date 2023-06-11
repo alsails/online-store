@@ -135,7 +135,6 @@
         }
 
         &__buy {
-            background: #FE7D00;
             border: none;
 
             width: 59px;
@@ -143,16 +142,33 @@
 
             border-radius: 50px;
 
-            background-image: url("../image/icons/buy_card.png");
-            background-repeat: no-repeat;
             background-size: 25px;
-            background-position: center;
+            background: #FE7D00 url("../image/icons/buy_card.png") no-repeat center;
 
             transition: .5s;
 
             &:hover {
                 cursor: pointer;
                 transform: scale(1.1);
+            }
+
+            &_active {
+                border: 1px solid #F07D0F;
+
+                width: 59px;
+                height: 59px;
+
+                border-radius: 50px;
+
+                background-size: 25px;
+
+                background: #FFFFFF url("../image/icons/buy_card.svg") no-repeat center;
+                transition: .5s;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.1);
+                }
             }
 
         }

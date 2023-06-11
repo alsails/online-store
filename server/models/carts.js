@@ -8,8 +8,7 @@ const ordersSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        def: 1,
-        required: true
+        default: 1
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

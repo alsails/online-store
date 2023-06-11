@@ -50,6 +50,18 @@ class Api extends React.Component {
         })
     }
 
+    changeUserInfo(data) {
+        return this._request(`users/me`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: data.name,
+                phone_number: data.phone_number
+            }),
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
     delLike(data) {
         return this._request(`goods/${data}/likes`, {
             method: 'DELETE',
@@ -65,6 +77,65 @@ class Api extends React.Component {
             credentials: 'include',
         })
     }
+
+    postCarts(data) {
+        return this._request(`carts`, {
+            method: 'POST',
+            body: JSON.stringify({
+                good: data
+            }),
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    getCarts() {
+        return this._request(`carts`, {
+            method: 'GET',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    changeQuantity(data) {
+        return this._request(`carts/quantity`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                _id: data._id,
+                quantity: data.quantity
+            }),
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    delCart(data) {
+        console.log(data)
+        return this._request(`carts/${data}`, {
+            method: 'DELETE',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    getOrders() {
+        return this._request(`orders`, {
+            method: 'GET',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    addOrders(data) {
+        return this._request(`orders`, {
+            method: 'POST',
+            body: JSON.stringify({
+                good: data
+            }),
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
 }
 
 const api = new Api({
@@ -72,7 +143,6 @@ const api = new Api({
     headers: {
         'Content-Type': 'application/json'
     },
-    credentials: 'include',
 });
 
 export default api;

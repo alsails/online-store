@@ -9,7 +9,7 @@ import "../styles/custom_select.scss"
 import CategoryTitle from "./CategoryTitle";
 import Select from "react-select";
 
-function CategoryCards({categories, goods, sale, onCardLike, currentUser, onLoginPopUpClick, isLoggedIn}) {
+function CategoryCards({carts, categories, goods, sale, onCardLike, currentUser, onLoginPopUpClick, isLoggedIn, onCart}) {
     const {categoriesId} = useParams();
     let categoryTitle;
     let necessaryGoods;
@@ -181,7 +181,7 @@ function CategoryCards({categories, goods, sale, onCardLike, currentUser, onLogi
                             return (
                                 <>
                                     <li key={shortid.generate()}>
-                                        <PreviewCard onLoginPopUpClick={onLoginPopUpClick} onCardLike={onCardLike} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
+                                        <PreviewCard carts={carts} onCart={onCart} onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
                                     </li>
                                 </>
                             )

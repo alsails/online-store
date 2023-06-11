@@ -7,7 +7,7 @@ const ordersSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        def: 'Обрабатывается',
+        default: 'Обрабатывается',
         required: true
     },
     date: {
@@ -23,6 +23,11 @@ const ordersSchema = new mongoose.Schema({
         ref: 'user',
         required: true
     },
+    goods: [],
+    total_price: {
+        type: Number,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('order', ordersSchema);

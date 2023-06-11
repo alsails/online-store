@@ -29,7 +29,7 @@ function PopUpWithForm({name, title, children, buttonText, isOpen, onClose, onSu
                         {children}
                         <button type="submit" className={styles.popup__form__save_button}>{buttonText || 'Обработка...'}</button>
                         {registerLink && <a href="#" onClick={register} className={styles.popup__form__login_link}>
-                            Еще не зарегистрированы? Регистрация
+                            Еще не зарегистрированы?
                         </a>}
                     </form>
                 </div>

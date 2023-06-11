@@ -1,11 +1,22 @@
 .card {
     position: relative;
+    width: 334px;
+    height: 293px;
+    border-radius: 20px 0 0 0;
+    overflow: hidden;
 
     &__img {
         position: absolute;
         top: 0;
         width: 334px;
         height: 293px;
+        overflow: hidden;
+
+        transition: .5s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     &__info_container {

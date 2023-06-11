@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import styles from '../styles/Good.module.scss'
 
 
-function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUser}) {
+function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUser, carts, onCart}) {
     const {goodId} = useParams();
 
     const allGoods = goods.map(good => {
@@ -19,6 +19,12 @@ function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUs
         return good._id === goodId
     })
 
+    const goodExists = carts.some((good) => {
+        return good.good._id === goodId;
+    });
+
+    console.log(goodExists)
+
     return (
         <div className={styles.good}>
             {good.map(item => {
@@ -32,6 +38,10 @@ function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUs
                 function handleLikeClick() {
                     onCardLike(item);
                 }
+
+                function handelAddCart() {
+                    onCart(item._id)
+                }
                 return (
                     <>
                         <ul className={styles.good__category_bar}>
@@ -41,7 +51,6 @@ function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUs
                             <Link to={`/categories/${item.category.category._id}`} style={{ textDecoration: 'none'}}>
                                 <li className={styles.good__category_bar__point}>{item.category.category.name}</li>
                             </Link>
-                            <li className={styles.good__category_bar__point}>{item.category.subcategory}</li>
 
                         </ul>
                         <div className={styles.good__card}>
@@ -61,7 +70,7 @@ function Good({goods, sale, isLoggedIn, onLoginPopUpClick, onCardLike, currentUs
                                                 <button className={styles.good__card__container__info__card_for_buy__info__like} onClick={onLoginPopUpClick}/>
                                             }
                                         </div>
-                                        <button className={styles.good__card__container__info__card_for_buy__buy}>В корзину</button>
+                                        <button onClick={handelAddCart} className={`${styles.good__card__container__info__card_for_buy__buy} ${goodExists ? styles.good__card__container__info__card_for_buy__buy__active : " " }`}>{goodExists ? 'В корзине' : 'В корзину'}</button>
                                     </div>
                                 </div>
                             </div>

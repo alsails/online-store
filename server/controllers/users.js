@@ -15,7 +15,6 @@ module.exports.createUser = (req, res, next) => {
         .hash(password, 10)
         .then((hash) => User.create({ email, password: hash }))
         .then((user) => {
-            console.log(user)
             const userInfo = user.toObject();
             delete userInfo.password;
             res.send({
@@ -65,6 +64,16 @@ function findUserById(id) {
 module.exports.getUser = (req, res, next) => {
     findUserById(req.user._id)
         .then((user) => {
+            res.send(user)
+        })
+        .catch(err => console.log(err));
+};
+
+module.exports.updateUserInfo = (req, res, next) => {
+    const {name, phone_number} = req.body;
+    User.findByIdAndUpdate(req.user._id, {name, phone_number}, {new: true})
+        .then((user) => {
+            console.log(user)
             res.send(user)
         })
         .catch(err => console.log(err));

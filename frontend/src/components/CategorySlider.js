@@ -7,7 +7,7 @@ import PreviewCard from "./PreviewCard";
 import styles from "../styles/categorySlider.module.scss"
 import {Link} from "react-router-dom";
 
-function CategorySlider({categories, goods, sale, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick}) {
+function CategorySlider({carts, categories, goods, sale, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick, onCart}) {
     const allGoods = goods.map(good => {
         const matchingName = sale.find(item => item.good_name._id === good._id);
         if (matchingName) {
@@ -31,7 +31,7 @@ function CategorySlider({categories, goods, sale, onCardLike, currentUser, isLog
                             return(
                                 <>
                                     <li key={shortid.generate()}>
-                                        <PreviewCard onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
+                                        <PreviewCard carts={carts} onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item} onCart={onCart}/>
                                     </li>
                                 </>
                             )
@@ -53,7 +53,7 @@ function CategorySlider({categories, goods, sale, onCardLike, currentUser, isLog
                                             return (
                                                 <>
                                                     <li key={shortid.generate()}>
-                                                        <PreviewCard onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
+                                                        <PreviewCard carts={carts} onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item} onCart={onCart}/>
                                                     </li>
                                                 </>
                                             )

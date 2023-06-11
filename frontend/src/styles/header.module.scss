@@ -54,12 +54,6 @@
             }
         }
 
-        &__search {
-            width: 438px;
-            border: none;
-            background-color: transparent;
-        }
-
         &__search_button {
             padding: 0;
             margin: 12.5px 18px 12.5px 0;
@@ -140,6 +134,24 @@
 
                 &__active {
                     background-image: url("../image/icons/profile__active.svg");
+                    background-size: cover;
+                    background-position: center;
+
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+
+            &__cart {
+                background-image: url("../image/icons/buy.svg");
+                background-size: cover;
+                background-position: center;
+
+                width: 32px;
+                height: 32px;
+
+                &__active {
+                    background-image: url("../image/icons/buy__active.svg");
                     background-size: cover;
                     background-position: center;
 

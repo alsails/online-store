@@ -4,8 +4,9 @@ import {Link, NavLink} from "react-router-dom";
 import styles from "../styles/previewCard.module.scss"
 
 
-function PreviewCard({item, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick}) {
+function PreviewCard({item, carts, onCardLike, currentUser, isLoggedIn, onLoginPopUpClick, onCart}) {
     let status = 'new_price' in item
+    let isCart = false;
     const isLiked = item.likes.some(i => {
         return i._id === currentUser._id
     });
@@ -15,6 +16,21 @@ function PreviewCard({item, onCardLike, currentUser, isLoggedIn, onLoginPopUpCli
         onCardLike(item);
     }
 
+    function handelAddCart() {
+        onCart(item._id)
+    }
+
+    if (carts !== undefined) {
+        const cart = carts.filter(cart => {
+            return cart.good.name === item.name
+        }).filter(cart => {
+            return cart.user._id === currentUser._id
+        })
+
+        if (cart.length !== 0) {
+            isCart = true
+        }
+    }
     return (
             <div className={styles.card}>
                 <div className={styles.card__top}>
@@ -36,7 +52,17 @@ function PreviewCard({item, onCardLike, currentUser, isLoggedIn, onLoginPopUpCli
                         {status && <p className={styles.card__bottom__prices__new}>{item.new_price.toFixed(2)} ₽</p>}
                         {!status && <p className={styles.card__bottom__prices__price}>{item.price.toFixed(2)} ₽</p>}
                     </div>
-                    <button className={styles.card__bottom__buy} />
+                    {
+                        isLoggedIn ?
+                            isCart ?
+                                <Link to={`/carts`} style={{ textDecoration: 'none' }}>
+                                    <button onClick={handelAddCart} className={styles.card__bottom__buy_active} />
+                                </Link>
+                                :
+                                <button onClick={handelAddCart} className={styles.card__bottom__buy} />
+                            :
+                            <button className={styles.card__bottom__buy} onClick={onLoginPopUpClick}/>
+                    }
                 </div>
             </div>
     );

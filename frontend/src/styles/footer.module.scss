@@ -43,6 +43,9 @@
                 margin-top: 13px;
 
                 max-width: 169px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 13px;
             }
 
             &__point {
@@ -54,10 +57,10 @@
 
                 color: #000000;
 
-                margin-bottom: 13px;
+                margin-top: 13px;
 
-                &:last-child {
-                    margin-bottom: 0;
+                &:first-child {
+                    margin-top: 0;
                 }
 
                 &::before {
@@ -79,10 +82,10 @@
 
                 color: #000000;
 
-                margin-bottom: 13px;
+                margin-top: 13px;
 
-                &:last-child {
-                    margin-bottom: 0;
+                &:first-child {
+                    margin-top: 0;
                 }
 
                 &:hover {
@@ -124,6 +127,10 @@
             background-color: transparent;
             
             padding: 0;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

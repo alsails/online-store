@@ -12,8 +12,10 @@ router.use('/goods', require('./goods'));
 router.use('/', require('./auth'));
 
 router.use(auth);
+router.use('/goods', require('./likes'));
 router.use('/users', require('./users'));
 router.use('/carts', require('./carts'));
+router.use('/orders', require('./orders'));
 
 router.use(() => {
     throw new NotFound('Страница не найдена');

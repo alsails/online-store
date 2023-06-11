@@ -164,6 +164,18 @@
             border-radius: 10px;
 
             margin: 40px 20px 0 20px;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &__active {
+              border: 1px solid #F07D0F;
+              background: #FFFFFF;
+
+              color: black;
+              padding:  18px 207px;
+            }
           }
         }
       }

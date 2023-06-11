@@ -2,6 +2,7 @@ import React from "react"
 import shortid from "shortid"
 
 import styles from "../styles/footer.module.scss"
+import {Link} from "react-router-dom";
 
 
 function Footer({categories}) {
@@ -22,12 +23,16 @@ function Footer({categories}) {
                         <div className={styles.footer__info__list__category}>
                             <ul className={styles.footer__info__list__points}>
                                 {categories.slice(0, 3).map(item => {
-                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
+                                    return <Link to={`/categories/${item._id}`} style={{ textDecoration: 'none' }}>
+                                        <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
+                                    </Link>
                                 })}
                             </ul>
                             <ul className={styles.footer__info__list__points}>
                                 {categories.slice(3.4).map(item => {
-                                    return <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
+                                    return <Link to={`/categories/${item._id}`} style={{ textDecoration: 'none' }}>
+                                        <li key={shortid.generate()} className={styles.footer__info__list__point}>{item.name}</li>
+                                    </Link>
                                 })}
                             </ul>
                         </div>
@@ -36,16 +41,24 @@ function Footer({categories}) {
                     <li className={styles.footer__info__list}>
                         <h2 className={styles.footer__info__list__title}>Информация</h2>
                         <ul className={styles.footer__info__list__points}>
-                            <li className={styles.footer__info__list__point}>О нас</li>
-                            <li className={styles.footer__info__list__point}>Гарантия</li>
-                            <li className={styles.footer__info__list__point}>Магазины</li>
+                            <Link  to={`/about`} style={{ textDecoration: 'none' }}>
+                                <li className={styles.footer__info__list__point}>О нас</li>
+                            </Link>
+                            <Link  to={`/warranty`} style={{ textDecoration: 'none' }}>
+                                <li className={styles.footer__info__list__point}>Гарантия</li>
+                            </Link>
+                            <Link  to={`/shops`} style={{ textDecoration: 'none' }}>
+                                <li className={styles.footer__info__list__point}>Магазины</li>
+                            </Link>
                         </ul>
                     </li>
                 </ul>
 
                 <div className={styles.footer__bottom}>
-                    <p className={styles.footer__bottom__copywriting}>©2023. Официальный сайт сети «Велдиш»</p>
-                    <button className={styles.footer__bottom__privacy}>Политика конфиденциальности</button>
+                    <p className={styles.footer__bottom__copywriting}>©2023. Официальный сайт сети «ВЕЛДИШ»</p>
+                    <Link  to={`/privacy`} style={{ textDecoration: 'none' }}>
+                        <button className={styles.footer__bottom__privacy}>Политика конфиденциальности</button>
+                    </Link>
                 </div>
             </div >
         </footer >
