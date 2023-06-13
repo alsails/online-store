@@ -1,46 +1,36 @@
 .statistics
-  display: flex
-  flex-direction: row
-  justify-content: space-between
+  width: calc(100vw - 320px)
+  margin: 76px 0 0 40px
 
-  &__title
-    text-align: center
-    font-weight: 700
-    font-size: 44px
-    letter-spacing: 0.03em
-
-    color: #000000
-    margin: 50px 0 0
-    padding: 0
-
-  &__subtitle
-    text-align: center
-    font-weight: 400
-    font-size: 24px
-    letter-spacing: 0.03em
-
-    color: #000000
-    margin: 20px 0 0
-    padding: 0
+  &__container
+    display: flex
+    flex-direction: row
+    column-gap: 50px
 
 
   &__charts
-    display: grid
-    grid-template-columns: 200px 150px
-    grid-template-rows: repeat(4, 26px)
-    column-gap: 30px
-    row-gap: 20px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    margin-right: 80px
 
-    margin-top: 100px
+  &__histogram
+    width: calc((100vw - 320px - 80px) / 2)
+    margin-top: 20px
+    padding: 28px 50px
+    box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+    border-radius: 20px
 
-    &__text
-      font-weight: 400
+    &__title
+      font-weight: 600
       font-size: 24px
-      letter-spacing: 0.03em
-
-      color: #000000
+      color: #3255B4
+      padding: 0 0 20px
       margin: 0
-      padding: 0
 
-      &__counter
-        text-align: end
+  &__pie
+    width: calc(100vw - 1177px - 250px)
+    margin-top: 20px
+    padding: 28px 50px
+    box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+    border-radius: 20px

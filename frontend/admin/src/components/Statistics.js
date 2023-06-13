@@ -1,39 +1,60 @@
-import styles from "../styles/statistics.module.sass"
-import Plots from "./Plot";
 
-function Statistics({orders}) {
-    const countByStatus = orders.reduce((accumulator, order) => {
-        const {status} = order;
-        accumulator[status] = (accumulator[status] || 0) + 1;
-        return accumulator;
-    }, {});
+import styles from '../styles/statistics.module.sass'
+import Card from "./Card";
+import ruble from '../image/icon/currency_ruble.svg'
+import cart from '../image/icon/shopping_cart.svg'
+import person from '../image/icon/person.svg'
+import Histogram from "./Histogram";
+import Pies from "./Pie";
 
-    const data = Object.keys(countByStatus).map((status) => ({
-        status: [status],
-        count: [countByStatus[status]],
-    }));
+function Statistics({orders, users}) {
+    const currentDate = new Date();
+    const lastMonthDate = new Date();
+    lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
+    const filteredOrders = orders.filter((order) => {
+        const orderDate = new Date(order.date);
+        return orderDate > lastMonthDate;
+    });
+
+    const filteredUsers = users.filter((user) => {
+        const userDate = new Date(user.date);
+        return userDate > lastMonthDate;
+    });
+
+    const totalSum = filteredOrders.reduce((sum, order) => sum + order.total_price, 0);
+    const orderCount = filteredOrders.length;
+    const userCount = filteredUsers.length;
+
+    function formatNumber(number) {
+        if (number >= 1000) {
+            const abbreviatedNumber = Math.floor(number / 1000);
+            return `${abbreviatedNumber}к`;
+        }
+
+        return number.toString();
+    }
+    const formattedNumber = formatNumber(totalSum)
+    console.log(orders)
 
     return (
-        <>
-            <h1 className={styles.statistics__title}>Статистика</h1>
-            <p className={styles.statistics__subtitle}>За все время</p>
-            <div className={styles.statistics}>
-                <Plots countByStatus={countByStatus}/>
-                <div className={styles.statistics__charts}>
-                    {
-                        data.map((item) => {
-                            return (
-                                <>
-                                    <p className={styles.statistics__charts__text}><b>{item.status}</b></p>
-                                    <p className={`${styles.statistics__charts__text} ${styles.statistics__charts__text__counter}`}>{item.count}</p>
-                                </>
-                            )
-                        })
-                    }
+        <div className={styles.statistics}>
+            <div className={styles.statistics__container}>
+                <Card number={formattedNumber} category="ПРИБЫЛЬ" img={ruble}/>
+                <Card number={orderCount} category="ЗАКАЗЫ" img={cart}/>
+                <Card number={userCount} category="НОВЫЕ ПОЛЬЗОВАТЕЛИ" img={person}/>
+            </div>
+            <div className={styles.statistics__charts}>
+                <div className={styles.statistics__histogram}>
+                    <p className={styles.statistics__histogram__title}>Продажи</p>
+                    <Histogram orders={orders}/>
+                </div>
+                <div className={styles.statistics__pie}>
+                    <p className={styles.statistics__histogram__title}>Заказы</p>
+                    <Pies orders={orders}/>
                 </div>
             </div>
-        </>
-    );
+        </div>
+    )
 }
 
-export default Statistics;
+export default Statistics

@@ -20,6 +20,7 @@ router.use('/carts', auth_user, require('./carts'));
 router.use('/orders', auth_user, require('./orders'));
 
 router.use('/admin', auth_staff, require('./staff'));
+router.use('/users', auth_staff, require('./getUsers'));
 
 router.use(() => {
     throw new NotFound('Страница не найдена');

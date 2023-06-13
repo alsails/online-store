@@ -50,6 +50,25 @@ class Api extends React.Component {
         })
     }
 
+    getUsers() {
+        return this._request(`users`, {
+            method: 'GET',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    changeOrders({_id, status}) {
+        return this._request(`orders`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                _id, status
+            }),
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
     changeUserInfo(data) {
         return this._request(`users/me`, {
             method: 'PATCH',

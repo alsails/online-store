@@ -1,13 +1,14 @@
-import styles from "../styles/Main.module.sass"
-import Plots from "./Plot";
-import Statistics from "./Statistics";
+import {Outlet, Route, Routes} from 'react-router-dom';
+import styles from '../styles/main.module.sass'
+import Aside from "./Aside";
+function Main({currentUser, signOut}) {
 
-function Main({currentUser, orders}) {
     return (
-        <div className={styles.main}>
-           <Statistics orders={orders}/>
+        <div className={styles.main_container}>
+            <Aside currentUser={currentUser} signOut={signOut}/>
+            <Outlet />
         </div>
-    );
+    )
 }
 
-export default Main;
+export default Main

@@ -27,7 +27,10 @@ const ordersSchema = new mongoose.Schema({
     total_price: {
         type: Number,
         required: true
-    }
+    },
+    comment: {
+        type: String,
+    },
 });
 
 module.exports = mongoose.model('order', ordersSchema);

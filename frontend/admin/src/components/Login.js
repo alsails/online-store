@@ -12,6 +12,7 @@ function Login({handleLogin}) {
         }
         console.log(values.login, values.password)
         handleLogin(values.login, values.password)
+        document.body.style.overflow = 'visible';
     }
 
     useEffect(() => {
