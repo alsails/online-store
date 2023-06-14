@@ -1,0 +1,97 @@
+.staff_container
+  width: calc(100vw - 320px - 160px)
+  margin: 76px 0 40px 40px
+  padding: 28px 50px
+  box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+  border-radius: 20px
+
+  &__title
+    font-weight: 600
+    font-size: 44px
+    color: #3255B4
+    padding: 0 0 20px
+    margin: 0
+
+  &__inputs
+    margin-top: 10px
+    display: flex
+    flex-direction: row
+    column-gap: 115px
+
+  &__input
+    width: 20px
+    height: 20px
+    margin: 0 20px 0 0
+
+  &__lable
+    font-style: normal
+    font-weight: 300
+    font-size: 24px
+    line-height: 38px
+
+    letter-spacing: 0.03em
+
+    color: #000000
+    margin: 0
+    padding: 0
+
+  &__button
+    border: none
+    border-radius: 20px
+    color: #FFFFFF
+    background-color: #3255B4
+    padding: 12px 24px
+
+    font-weight: 400
+    font-size: 22px
+    margin: 30px 0 0
+
+
+.staff_table
+  width: calc(100% - 80px)
+  color: #090808
+  border-collapse: separate
+
+  &__container
+    margin-top: 40px
+    height: 555px
+    overflow: scroll
+
+  &__tr
+    &:nth-child(2n)
+      background: rgba(82, 127, 255, 0.05)
+
+    &__data
+      &:hover
+        background-color: rgba(152, 176, 251, 0.22)
+
+  &__th
+    white-space: nowrap
+    padding: 12px
+    background: rgba(71, 113, 246, 0.27)
+
+  &__td
+    white-space: nowrap
+    padding: 12px
+    text-align: center
+    width: 300px
+
+    &__block
+      color: #e63e3e
+      &:hover
+        cursor: pointer
+
+  &__statusSelect
+    background: transparent
+    border: 0
+    width: 140px
+
+    &:focus
+      outline: none !important
+
+    &__option
+      background-color: rgba(71, 113, 246, 0.08)
+
+      &:nth-child(2n)
+        background: #ffffff
+

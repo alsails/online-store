@@ -1,0 +1,118 @@
+.order_page
+  width: calc(100vw - 320px - 160px)
+  margin: 30px 0 20px 40px
+
+  &__info
+    box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+    border-radius: 20px
+    padding: 28px 50px
+
+    &__title
+      font-weight: 600
+      font-size: 32px
+      color: #3255B4
+      padding: 0 0 35px
+      margin: 0
+
+    &__container
+      width: 1300px
+
+      &__header
+        display: flex
+        flex-direction: row
+        column-gap: 60px
+
+      &__text
+        font-weight: 410
+        font-size: 18px
+        color: #000000
+        padding: 0
+        margin: 0
+        text-align: justify
+
+        &__w120
+          width: 120px
+
+        &__w340
+          width: 340px
+
+        &__w200
+          width: 200px
+
+        &__w280
+          width: 280px
+
+        &__title
+          font-weight: 600
+          font-size: 20px
+          padding: 0 0 8px
+
+
+  &__goods
+    margin-top: 50px
+    box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+    border-radius: 20px
+    padding: 28px 50px
+
+    &__container
+      height: 420px
+      overflow-x: hidden
+      overflow-y: scroll
+
+    &__title
+      font-weight: 600
+      font-size: 28px
+      color: #000000
+      padding: 0 0 20px
+      margin: 0
+
+    &__table
+      color: #090808
+      border-collapse: separate
+
+      &__tr
+        &:nth-child(2n)
+          background: rgba(82, 127, 255, 0.05)
+
+        &__data
+          &:hover
+            background-color: rgba(152, 176, 251, 0.22)
+
+      &__th
+        white-space: nowrap
+        padding: 12px
+        background: rgba(71, 113, 246, 0.27)
+
+      &__td
+        white-space: nowrap
+        padding: 12px
+        width: 300px
+        text-align: center
+
+        &__name
+          text-align: justify
+
+  &__status
+    width: 455px
+    margin-top: 38px
+    box-shadow: rgb(0 0 0 / 4%) 0 5px 22px, rgb(0 0 0 / 3%) 0 0 0 0.5px
+    border-radius: 20px
+    padding: 28px 50px 28px
+
+    display: flex
+    flex-direction: row
+    column-gap: 70px
+
+    &__title
+      font-weight: 600
+      font-size: 28px
+      color: #000000
+      padding: 0
+      margin: 0
+
+    &__text
+      font-weight: 400
+      font-size: 24px
+      color: #000000
+      padding: 4px 0 0
+      margin: 0
