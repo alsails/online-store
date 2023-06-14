@@ -1,0 +1,19 @@
+.cards__container {
+    width: 1141px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.cards {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 334px);
+    grid-template-rows: repeat(2, 293px);
+
+    column-gap: 67px;
+    row-gap: 17px;
+}
+

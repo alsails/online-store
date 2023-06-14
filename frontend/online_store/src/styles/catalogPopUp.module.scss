@@ -1,0 +1,77 @@
+.popup {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+
+  top: 118px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  justify-items: center;
+  align-items: center;
+
+  &__opened {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__container {
+    width: 1079px;
+    background: #FFFFFF;
+    border-radius: 0 0 20px 20px;
+
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+
+    color: #000000;
+
+    margin: 0;
+    padding: 34px 0 0 62px;
+  }
+
+  &__categories {
+    list-style: none;
+    padding: 0 0 54px 61px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 63px;
+    row-gap: 20px;
+    width: 834px;
+
+    &__point {
+      font-family: 'Roboto', serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 24px;
+      width: 218px;
+
+      color: #000000;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        content: url("../image/icons/arrow_footer.png");
+        margin-right: 6px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

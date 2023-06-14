@@ -1,0 +1,136 @@
+.footer {
+    background-size: 100%;
+    background: #EBEBEB;
+
+    &__container {
+        width: 934px;
+        margin: 0 auto;
+    }
+
+    &__info {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+
+        list-style: none;
+
+        padding: 50px 0 62px 0;
+
+        &__list {
+
+            &__category {
+                display: flex;
+                width: 366px;
+                justify-content: space-between;
+            }
+
+            &__title {
+                margin: 0;
+                padding: 0;
+
+                font-family: 'Roboto', serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 28px;
+                line-height: 33px;
+
+                color: #000000;
+            }
+
+            &__points {
+                list-style: none;
+                padding: 0;
+                margin-top: 13px;
+
+                max-width: 169px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 13px;
+            }
+
+            &__point {
+                font-family: 'Roboto', serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 18px;
+                line-height: 21px;
+
+                color: #000000;
+
+                margin-top: 13px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &::before {
+                    content: url("../image/icons/arrow_footer.png");
+                    margin-right: 6px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            &__point_contact {
+                font-family: 'Roboto', serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 18px;
+                line-height: 21px;
+
+                color: #000000;
+
+                margin-top: 13px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+
+        padding-bottom: 24px;
+
+        &__copywriting {
+            font-family: 'Roboto', serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 21px;
+
+            color: #313131;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        &__privacy {
+            font-family: 'Roboto', serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 21px;
+
+            color: #313131;
+
+            border: none;
+            background-color: transparent;
+            
+            padding: 0;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
