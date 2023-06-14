@@ -1,0 +1,69 @@
+.custom_select {
+  &__control {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid #b2b2b2 !important;
+    box-shadow: none !important;
+    width: 547px !important;
+
+    height: 48px;
+  }
+
+  &__control--is-focused {
+      border-bottom: 2px solid #929292 !important;
+  }
+
+  &__value-container {
+    padding: 0 !important;
+    cursor: text !important;
+  }
+
+  &__input-container {
+    color: #ebebeb !important;
+  }
+
+  &__input {
+    color: #313131 !important;
+  }
+
+  &__multi-value {
+    border-radius: 8px !important;
+    background-color: #ebebeb !important;
+    margin-bottom: 7px !important;
+    max-width: 120px;
+  }
+
+  &__multi-value__label {
+    padding: 8px !important;
+    font-size: 18px !important;
+  }
+
+  &__multi-value__remove {
+    color: #313131 !important;
+  }
+
+  &__indicator {
+    color: #313131 !important;
+    cursor: pointer;
+  }
+
+  &__menu {
+    background-color: #ebebeb !important;
+    width: 547px !important;
+    color: #313131;
+  }
+
+  &__option {
+    cursor: pointer !important;
+
+    &--is-focused {
+      background-color: lighten(#ebebeb, 8%) !important;
+      color: #313131 !important;
+    }
+  }
+}
+
+.css-b62m3t-container {
+  width: 547px !important;
+}

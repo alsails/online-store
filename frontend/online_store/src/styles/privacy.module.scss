@@ -1,0 +1,57 @@
+.privacy {
+  width: 1138px;
+  margin: 30px auto 130px auto;
+  text-align: justify;
+
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+
+    color: #000000;
+
+    padding: 0;
+    margin: 0;
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+
+    color: #000000;
+    padding: 0;
+    margin: 50px 0 0 0;
+  }
+
+  &__list_name {
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+
+    color: #000000;
+    padding: 0;
+    margin: 40px 0;
+  }
+  &__list {
+    &::marker {
+      color: #000000;
+    }
+  }
+  &__text {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+
+    color: #000000;
+    padding: 0;
+    margin: 0 0 20px;
+
+    &__list {
+      margin: 0 0 10px;
+    }
+  }
+}

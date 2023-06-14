@@ -1,0 +1,26 @@
+.category_cards {
+  margin: 45px auto 0 auto;
+  max-width: 1141px;
+
+  &__container {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 344px);
+    grid-column-gap: 55px;
+    grid-row-gap: 46px;
+
+    padding: 0;
+    margin: 25px 0 46px 0;
+
+    width: 1140px;
+    flex-wrap: wrap;
+  }
+}
+
+.selectors {
+  display: flex;
+  flex-direction: row;
+  column-gap: 46px;
+  flex-wrap: wrap;
+}
+

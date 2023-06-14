@@ -1,0 +1,215 @@
+.good {
+  margin: 0 auto;
+  width: 1151px;
+
+  &__category_bar {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+    column-gap: 29px;
+
+    padding: 0;
+    margin: 38px 0 0 0;
+
+    &__point {
+      margin: 0;
+      padding: 0;
+
+      font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 22px;
+      letter-spacing: 0.03em;
+      color: #878787;
+
+      &:hover {
+        cursor: pointer;
+        color: #5d5a5a;
+      }
+    }
+  }
+
+  &__card {
+
+    &__container {
+      display: flex;
+      flex-direction: row;
+      margin-top: 59px;
+      justify-content: space-between;
+
+      &__img {
+        width: 498px;
+        height: 498px;
+        object-fit: cover;
+      }
+
+      &__info {
+        flex-direction: column;
+        width: 599px;
+
+        &__title {
+          margin: 0;
+          padding: 0;
+
+          font-family: 'Roboto', sans-serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 32px;
+          line-height: 38px;
+          letter-spacing: 0.03em;
+
+          color: #000000;
+        }
+
+        &__card_for_buy {
+          width: 589px;
+          height: 203px;
+
+          background: #FFFFFF;
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.25);
+          border-radius: 20px 0 0 0;
+
+          margin-top: 62px;
+          position: relative;
+
+          &__info {
+            display: flex;
+            flex-direction: row;
+
+            &__new_price {
+              font-family: 'Roboto', sans-serif;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 45px;
+              line-height: 53px;
+
+              color: #FF0303;
+
+              margin: 26px 0 0 20px;
+            }
+
+            &__old_price {
+              font-family: 'Roboto', sans-serif;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 28px;
+              line-height: 33px;
+
+              color: #BBBABA;
+
+              margin: 41px 0 0 13px;
+            }
+
+            &__price {
+              font-family: 'Roboto', sans-serif;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 45px;
+              line-height: 53px;
+
+              color: #000000;
+
+              margin: 26px 0 0 20px;
+            }
+
+            &__like {
+              width: 32px;
+              height: 32px;
+
+              border: none;
+              background-color: transparent;
+              background-image: url("../image/icons/like.svg");
+              padding: 0;
+
+              position: absolute;
+              top: 26px;
+              left: 536px;
+
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &__active {
+                width: 32px;
+                height: 32px;
+
+                border: none;
+                background-color: transparent;
+                background-image: url("../image/icons/like__active.svg");
+                padding: 0;
+
+                position: absolute;
+                top: 26px;
+                left: 536px;
+              }
+            }
+          }
+
+          &__buy {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 27px;
+
+            color: #FFFFFF;
+
+            padding: 18px 208px;
+
+            border: none;
+            background: #FE7D00;
+            border-radius: 10px;
+
+            margin: 40px 20px 0 20px;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &__active {
+              border: 1px solid #F07D0F;
+              background: #FFFFFF;
+
+              color: black;
+              padding:  18px 207px;
+            }
+          }
+        }
+      }
+    }
+    &__description {
+      width: 1005px;
+      margin-top: 58px;
+
+      &__title {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 38px;
+
+        color: #000000;
+
+        margin: 0;
+        padding: 0;
+      }
+
+      &__text {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 28px;
+        line-height: 33px;
+        letter-spacing: 0.03em;
+
+        color: #000000;
+
+        margin: 18px 0 91px 0;
+        padding: 0;
+      }
+    }
+  }
+}
