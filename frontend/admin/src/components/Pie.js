@@ -4,7 +4,6 @@ import {Chart, registerables} from 'chart.js';
 import styles from '../styles/pie.module.sass'
 
 function Pies({orders}) {
-    console.log(orders)
     const orderStatuses = orders.map((order) => order.status);
 
     // Подсчитайте количество заказов для каждого статуса

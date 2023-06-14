@@ -7,7 +7,7 @@ import person from '../image/icon/person.svg'
 import Histogram from "./Histogram";
 import Pies from "./Pie";
 
-function Statistics({orders, users}) {
+function Statistics({orders, users, accessLevel}) {
     const currentDate = new Date();
     const lastMonthDate = new Date();
     lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
@@ -34,20 +34,25 @@ function Statistics({orders, users}) {
         return number.toString();
     }
     const formattedNumber = formatNumber(totalSum)
-    console.log(orders)
 
     return (
         <div className={styles.statistics}>
             <div className={styles.statistics__container}>
-                <Card number={formattedNumber} category="ПРИБЫЛЬ" img={ruble}/>
+                {(accessLevel === 100 || accessLevel === 40) && (
+                    <Card number={formattedNumber} category="ПРИБЫЛЬ" img={ruble}/>
+                )}
                 <Card number={orderCount} category="ЗАКАЗЫ" img={cart}/>
-                <Card number={userCount} category="НОВЫЕ ПОЛЬЗОВАТЕЛИ" img={person}/>
+                {(accessLevel === 100 || accessLevel === 40) && (
+                    <Card number={userCount} category="НОВЫЕ ПОЛЬЗОВАТЕЛИ" img={person}/>
+                )}
             </div>
             <div className={styles.statistics__charts}>
-                <div className={styles.statistics__histogram}>
-                    <p className={styles.statistics__histogram__title}>Продажи</p>
-                    <Histogram orders={orders}/>
-                </div>
+                {(accessLevel === 100 || accessLevel === 40) && (
+                    <div className={styles.statistics__histogram}>
+                        <p className={styles.statistics__histogram__title}>Продажи</p>
+                        <Histogram orders={orders}/>
+                    </div>
+                )}
                 <div className={styles.statistics__pie}>
                     <p className={styles.statistics__histogram__title}>Заказы</p>
                     <Pies orders={orders}/>

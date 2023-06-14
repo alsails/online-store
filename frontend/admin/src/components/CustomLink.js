@@ -1,8 +1,10 @@
-import {Link, useLocation } from "react-router-dom";
+import {Link, useLocation, useMatch} from "react-router-dom";
 
 const CustomLink = ({children, to}) => {
-    const location = useLocation();
-    const match = location.pathname === to;
+    const match = useMatch({
+        path: to,
+        end: to.length === 10,
+    })
 
     return (
         <Link

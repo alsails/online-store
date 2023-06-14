@@ -58,6 +58,22 @@ class Api extends React.Component {
         })
     }
 
+    getStaffs() {
+        return this._request(`admin/staff`, {
+            method: 'GET',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
+    delStaff(data) {
+        return this._request(`admin/staff/${data}`, {
+            method: 'DELETE',
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+
     changeOrders({_id, status}) {
         return this._request(`orders`, {
             method: 'PATCH',

@@ -2,10 +2,10 @@ const router = require('express').Router();
 
 const {
     login,
-    createUser,
+    createStaff,
 } = require('../controllers/staff');
 
 router.post('/signin', login);
-router.post('/signup', createUser);
+router.post('/signup', createStaff);
 
 module.exports = router;

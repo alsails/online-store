@@ -11,13 +11,13 @@ function request(endpoint, options) {
     return fetch(`${baseUrl}/${endpoint}`, options).then(checkResponse)
 }
 
-export const signup = ({ password, login }) => {
+export const signup = (formValue) => {
     return request(`admin/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ password, login })
+        body: JSON.stringify(formValue)
     })
 };
 

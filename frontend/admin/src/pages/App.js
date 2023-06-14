@@ -14,7 +14,8 @@ import Api from "../utils/Api";
 import Orders from "../components/Orders";
 import Statistics from "../components/Statistics";
 import Staff from "../components/Staff";
-import OrderPage from "../OrderPage";
+import OrderPage from "../components/OrderPage";
+import RegisterPopUp from "../components/RegisterPopUp";
 
 
 function App() {
@@ -22,16 +23,30 @@ function App() {
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [orders, setOrders] = useState([])
     const [users, setUsers] = useState([])
+    const [staff, setStaffs] = useState([])
+    const [isRegisterPopUp, setRegisterPopUp] = useState(false)
+    const [accessLevel, setAccessLevel] = useState()
 
     const navigate = useNavigate();
 
-    function handleLogin(login, password) {
-        auth.signin(login, password)
-            .then(() => {
-                setLoggedIn(true)
-                navigate('/dashboard')
+    function handelRegisterPopUpOpen() {
+        setRegisterPopUp(true)
+    }
+
+    function ClosePopUp() {
+        setRegisterPopUp(false)
+    }
+
+    function handleRegister(formValue) {
+        auth.signup(formValue)
+            .then((res) => {
+                const newStaffMember = res;
+                setStaffs(prevStaff => [...prevStaff, newStaffMember]);
+                ClosePopUp()
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     function changeOrder({_id, status}) {
@@ -54,28 +69,65 @@ function App() {
         localStorage.removeItem('token');
         setLoggedIn(false);
 
-        navigate('/sign-in');
+        navigate('/');
+    }
+
+    function checkAccessLevel(role) {
+        if (role === "Администратор") {
+            setAccessLevel(100)
+        }
+        if (role === "Отдел сборки заказов") {
+            setAccessLevel(80)
+        }
+        if (role === "Отдел доставки") {
+            setAccessLevel(60)
+        }
+        if (role === "Отдел контроля исполнения заказов") {
+            setAccessLevel(40)
+        }
+    }
+
+    function handleTokenCheck() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            auth.checkToken().then((res) => {
+                if (res) {
+                    setLoggedIn(true);
+                    setCurrentUser(res);
+                    checkAccessLevel(res.role.name)
+                    navigate("/dashboard", {replace: true})
+                }
+            })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
     }
 
     useEffect(() => {
-        function handleTokenCheck() {
-            const token = localStorage.getItem('token');
-            if (token) {
-                auth.checkToken().then((res) => {
-                    if (res) {
-                        setLoggedIn(true);
-                        setCurrentUser(res);
-                        navigate("/dashboard", {replace: true})
-                    }
-                })
-                    .catch(err => {
-                        console.log(err);
-                    });
-            }
-        }
-
         handleTokenCheck();
     }, [])
+
+    function handleLogin(login, password) {
+        auth.signin(login, password)
+            .then((res) => {
+                handleTokenCheck()
+            })
+            .catch(err => console.log(err));
+    }
+
+    function handleStaffDelete(staff) {
+        console.log(staff)
+        Api
+            .delStaff(staff)
+            .then(() => {
+                setStaffs((state) =>
+                    state.filter(item => item._id !== (staff))
+                )
+            })
+            .catch(err =>
+                console.log(err))
+    }
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -89,6 +141,11 @@ function App() {
                     setUsers(users)
                 })
                 .catch(err => console.log(err))
+            Api.getStaffs()
+                .then((staffs) => {
+                    setStaffs(staffs)
+                })
+                .catch(err => console.log(err))
         }
     }, [isLoggedIn]);
 
@@ -97,20 +154,25 @@ function App() {
             <div className={page.page}>
                 <CurrentStaffContext.Provider value={currentUser}>
                     <Routes>
-                        <Route path="/sign-in" element={
+                        <Route path="/" element={
                             <main className={page.page__main}>
                                 <Login handleLogin={handleLogin}/>
                             </main>
                         }/>
 
-                        <Route path="/dashboard/*" element={<ProtectedRouteElement element={Main} loggedIn={isLoggedIn} signOut={signOut} currentUser={currentUser}/>}>
-                            <Route path="" element={<Statistics users={users} orders={orders}/>} />
-                            <Route path="orders" element={<Orders order={orders} changeOrder={changeOrder}/>} />
-                            <Route path="order/:orderID" element={<OrderPage order={orders}/>} />
-                            <Route path="staff" element={<Staff orders={orders}/>} />
+                        <Route path="/dashboard/*"
+                               element={<ProtectedRouteElement element={Main} loggedIn={isLoggedIn} signOut={signOut}
+                                                               currentUser={currentUser} accessLevel={accessLevel}/>}>
+                            <Route path="" element={<Statistics users={users} orders={orders} accessLevel={accessLevel}/>}/>
+                            <Route path="orders" element={<Orders order={orders} changeOrder={changeOrder} accessLevel={accessLevel}/>}/>
+                            <Route path="orders/:orderID" element={<OrderPage orders={orders} accessLevel={accessLevel}/>}/>
+                            <Route path="staff"
+                                   element={<Staff handelOpenPopUp={handelRegisterPopUpOpen} onDel={handleStaffDelete}
+                                                   staff={staff}/>} />
                         </Route>
                     </Routes>
                 </CurrentStaffContext.Provider>
+                <RegisterPopUp handleRegister={handleRegister} isOpen={isRegisterPopUp} onClose={ClosePopUp}/>
             </div>
         </div>
     )

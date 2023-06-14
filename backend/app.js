@@ -19,6 +19,7 @@ const limiter = rateLimit({
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1/onlineStoreDB');
+
 app.use(cors({
     origin: [
         'http://localhost:3000',

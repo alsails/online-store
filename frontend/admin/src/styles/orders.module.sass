@@ -36,14 +36,15 @@
     padding: 0
 
 .orders_table
-  width: calc(100% - 80px)
+  width: 100%
   color: #090808
   border-collapse: separate
 
   &__container
     margin-top: 40px
     max-height: 610px
-    overflow: scroll
+    overflow-x: hidden
+    overflow-y: scroll
 
   &__tr
     &:nth-child(2n)
@@ -51,7 +52,6 @@
 
     &__data
       &:hover
-        cursor: pointer
         background-color: rgba(152, 176, 251, 0.22)
 
   &__th
@@ -65,6 +65,9 @@
     text-align: center
     width: 300px
 
+    &__link
+      &:hover
+       cursor: pointer
 
   &__statusSelect
     background: transparent
