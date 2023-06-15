@@ -331,7 +331,7 @@ function App() {
                         }/>
                         <Route path="/goods/like" element={
                             <>
-                                <Likes isLoggedIn={isLoggedIn} goods={goods} onLoginPopUpClick={handleLoginPopUpClick} onCardLike={handleCardLike} sale={sale} currentUser={currentUser}/>
+                                <Likes carts={carts} onCart={handleAddGoodToCart} isLoggedIn={isLoggedIn} goods={goods} onLoginPopUpClick={handleLoginPopUpClick} onCardLike={handleCardLike} sale={sale} currentUser={currentUser}/>
                             </>
                         }/>
                         <Route path="/carts" element={

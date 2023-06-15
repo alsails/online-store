@@ -7,7 +7,7 @@ function CatalogPopUp({categories, isOpen, onClose}) {
     const classes = `${styles.popup} ${isOpen ? styles.popup__opened : " "}` // два класса
 
     useEffect(() => {
-        const popup = document.querySelector('.catalogPopUp_popup__KiIwp')
+        const popup = document.querySelector('.popup__container')
         function closeByOverlayClick(evt) {
             if (evt.target === evt.currentTarget) {
                 onClose();

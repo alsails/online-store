@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import Api from "../utils/Api";
 import PreviewCard from "./PreviewCard";
 
-function Likes({goods, sale, onCardLike, currentUser, isLoggedIn}) {
+function Likes({goods, sale, onCardLike, currentUser, isLoggedIn, carts, onCart, onLoginPopUpClick}) {
     const allGoods = goods.map(good => {
         const matchingName = sale.find(item => item.good_name.name === good.name);
         if (matchingName) {
@@ -21,7 +21,7 @@ function Likes({goods, sale, onCardLike, currentUser, isLoggedIn}) {
                     allGoods.filter(item => {
                         return item.likes.some(i => i._id === currentUser._id)
                     }).map(item => {
-                    return <PreviewCard isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
+                    return <PreviewCard carts={carts} onCart={onCart} onLoginPopUpClick={onLoginPopUpClick} isLoggedIn={isLoggedIn} currentUser={currentUser} onCardLike={onCardLike} item={item}/>
                 })
                 }
             </div>

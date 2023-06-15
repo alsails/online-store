@@ -7,7 +7,7 @@ function Orders({order, changeOrder, accessLevel}) {
     const [selectedStatus, setSelectedStatus] = useState('Все');
 
     useEffect(() => {
-        setOrders(order)
+        setOrders(order.sort((a, b) => new Date(b.date) - new Date(a.date)))
     }, [])
 
     const handleStatusChange = (event, orderId) => {
@@ -149,7 +149,7 @@ function Orders({order, changeOrder, accessLevel}) {
                                                         <option className={styles.orders_table__statusSelect__option}
                                                                 value="В сборке">В сборке</option>
                                                     )}
-                                                    {(accessLevel === 100 || accessLevel === 80 || accessLevel === 60) && (
+                                                    {(accessLevel === 100 || accessLevel === 60) && (
                                                         <option className={styles.orders_table__statusSelect__option}
                                                                 value="В доставке">В доставке</option>
                                                     )}

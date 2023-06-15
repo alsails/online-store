@@ -4,7 +4,9 @@ import {Chart, registerables} from 'chart.js';
 import styles from '../styles/pie.module.sass'
 
 function Pies({orders}) {
-    const orderStatuses = orders.map((order) => order.status);
+    const orderStatuses = orders
+        .filter((order) => order.status !== 'Завершен')
+        .map((order) => order.status);
 
     // Подсчитайте количество заказов для каждого статуса
     const statusCounts = orderStatuses.reduce((acc, status) => {
@@ -20,8 +22,7 @@ function Pies({orders}) {
                 backgroundColor: [
                     'rgb(64,64,183)',
                     'rgb(125,167,214)',
-                    'rgb(255,188,97)',
-                    'rgb(230,120,71)',
+                    'rgb(105,133,205)',
                 ],
             },
         ],

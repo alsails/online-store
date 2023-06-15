@@ -6,7 +6,7 @@ function SearchPopUp({isOpen, onClose, cardsList}) {
     console.log(cardsList)
 
     useEffect(() => {
-        const popup = document.querySelector('.searchPopUp_popup__1gKkW')
+        const popup = document.querySelector('.popup__container')
         function closeByOverlayClick(evt) {
             if (evt.target === evt.currentTarget) {
                 onClose();
